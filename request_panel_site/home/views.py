@@ -42,10 +42,10 @@ def main_panel(request):
         try:
             result = verify_telegram_authentication(bot_token=TOKEN, request_data=request.GET)
         except TelegramDataIsOutdatedError:
-            return redirect('login')
+            return redirect('login_page')
 
         except NotTelegramDataError:
-            return redirect('login')
+            return redirect('login_page')
 
         print('someone just got access to page')
         return render(request, 'request_form.html',{'title':'Main page'})
