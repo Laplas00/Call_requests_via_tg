@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from django.shortcuts import render, HttpResponse
-import datetime
+from django.shortcuts import render, HttpResponse, redirect
 import json
 
 
@@ -27,4 +26,10 @@ def login_view(request):
     
 
 def login_authentication(request):
+    if request.method == "GET":
+        request.GET.get('hash')
+        print('hash was found')
+
+    return redirect('main_panel')
+    
     ...

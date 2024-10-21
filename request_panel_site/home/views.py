@@ -39,5 +39,3 @@ def main_panel(request):
         else:
             print('someone just got access to page')
             return render(request, 'request_form.html',{'title':'Main page'})
-    else:
-        return render(request, 'request_form.html',{'title':'Main page'})
