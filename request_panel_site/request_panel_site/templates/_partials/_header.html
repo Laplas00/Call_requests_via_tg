@@ -21,11 +21,11 @@
         <div class="nav-right col pull-right right-menu">
             <ul class="nav-menus">
                 <li></li>
-                <li class="onhover-dropdown____dont_exist"> <span class="media user-header"><img class="img-fluid"
-                            src="{% static 'assets/images/dashboard/user.png' %}" alt=""></span>
+                <li class="onhover-dropdown____dont_exist"> <span class="media user-header"><img height="60" class="img-fluid"
+                            src="{{ profile_photo }}" alt=""></span>
                     <ul class="onhover-show-div profile-dropdown">
                         <li class="gradient-primary">
-                            <h5 class="f-w-600 mb-0">{{ user.get_username }}</h5><span>Web Designer</span>
+                            <h5 class="f-w-600 mb-0">{{ first_name }}</h5><span>Web Designer</span>
                         </li>
                         <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
