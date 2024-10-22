@@ -1,16 +1,16 @@
+from django_telegram_login.errors import (
+    NotTelegramDataError,TelegramDataIsOutdatedError,)
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, HttpResponse, redirect
 from .models import TelegramUser 
 import json
 from icecream import ic
-from django_telegram_login.authentication import verify_telegram_authentication
-from django_telegram_login.errors import (
-    NotTelegramDataError,TelegramDataIsOutdatedError,)
 import pandas as pd
 from django.contrib.auth import login
-
+from django_telegram_login.authentication import verify_telegram_authentication
 from request_panel_site.settings import TELEGRAM_BOT_TOKEN 
+
 
 def login_page(request):
     content = render(request, 'login_page.html').content
@@ -68,6 +68,22 @@ def login_authentication(request):
             ic(data)
             try:
                 result = verify_telegram_authentication(bot_token=TELEGRAM_BOT_TOKEN, request_data=request.GET)
+                print(result)
+                user_username = data.get('username')
+                doc_data = get_staff_members()
+                ic(doc_data.admins.values)
+                ic(user_username)
+                
+                if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
+                    # validation of manager ixist in db
+                    print('user in doc_data admins or managerss')
+                    user, res = save_telegram_user(data)
+                    login(request, user)
+                    
+                else:
+                    print(f'user {user_username} not in doc values')
+
+                return redirect('main_panel')
 
             except TelegramDataIsOutdatedError:
                 return HttpResponse('Authentication was received more than a day ago.')
@@ -75,19 +91,7 @@ def login_authentication(request):
             except NotTelegramDataError:
                 return HttpResponse('The data is not related to Telegram!')
             
-            user_username = data.get('username')
-            doc_data = get_staff_members()
-            ic(doc_data.admins.values)
-            ic(user_username)
             
-            if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
-                # validation of manager ixist in db
-                user, res = save_telegram_user(data)
-                login(request, user)
-                print('save complete')
-                return redirect('main_panel')
-            else:
-                print(f'user {user_username} not in doc values')
         else:
             print('no hash')
             return redirect('login_page')
