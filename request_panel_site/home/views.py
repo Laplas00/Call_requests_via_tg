@@ -16,7 +16,7 @@ async def send_telegram_message(message):
 
 def telegram_login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
-        if request.user.is_authenticated and isinstance(request.user, TelegramUser ):
+        if request.session['is_authenticated'] == True:
             return view_func(request, *args, **kwargs)
         return redirect('login page')
     return _wrapped_view
@@ -42,33 +42,19 @@ def main_panel(request):
         # -1002395487349
         return redirect('main_panel')  # Redirect to a success page
     elif request.method == 'GET':
-        if len(request.GET) > 1:
-            print('more than one parametr in this query')
-            return render(request, 'request_form.html',{'title':'Main page'})
-        else:
-            
-            user_id = request.session.get('user_id')
-            
-            try:
-                # Step 2: Retrieve the TelegramUser  instance using the user_id
-                user = TelegramUser.objects.get(id=user_id)
-                
-                # Step 3: Prepare the profile data to return
-                profile_data = {
-                    'first_name': user.first_name,  # Assuming you have this field
-                    'profile_picture': user.profile_picture.url if user.profile_picture else None,  # Assuming you have this field
-                }
-                
-                # Step 4: Return the profile data as a JSON response
-                # return JsonResponse(profile_data, status=200)
-                print('someone just got access to page')
-                return render(request, 'request_form.html',
-                              {'title':'Main page',
-                                'profile_photo':profile_data['profile_picture'],
-                                'first_name':profile_data['first_name'] })
-            
-            except TelegramUser.DoesNotExist:
-                return JsonResponse({'error': 'User  not found'}, status=404)
+        user_id = request.session['id']
+        user = TelegramUser.objects.get(id=user_id)
 
-
-            
+        profile_data = {
+            'first_name': user.first_name,  # Assuming you have this field
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,  # Assuming you have this field
+        }
+        
+        # Step 4: Return the profile data as a JSON response
+        # return JsonResponse(profile_data, status=200)
+        print('someone just got access to page')
+        return render(request, 'request_form.html',
+                        {'title':'Main page',
+                        'profile_photo':profile_data['profile_picture'],
+                        'first_name':profile_data['first_name'] })
+        

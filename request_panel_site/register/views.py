@@ -54,7 +54,7 @@ def save_telegram_user(data):
 
 def login_authentication(request):
     if request.method == "GET":
-        if request.user.is_authenticated:
+        if request.session['is_authenticated'] == True:
             print('user is authenticated')
             return redirect('main_panel')
         else:
@@ -77,9 +77,10 @@ def login_authentication(request):
                 if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                     # validation of manager ixist in db
                     print('user in doc_data admins or managerss')
-                    user, res = save_telegram_user(data)
-                    login(request, user)
-                    
+                    save_telegram_user(data)
+                    request.session['is_authenticated'] = True
+                    request.session['id'] = data.get('id')
+
                 else:
                     print(f'user {user_username} not in doc values')
 
