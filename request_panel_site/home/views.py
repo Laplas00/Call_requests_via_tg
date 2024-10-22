@@ -5,6 +5,7 @@ from telegram import Bot
 import asyncio
 from register.models import TelegramUser
 from django.http import JsonResponse
+from icecream import ic
 
 TOKEN = '7342161081:AAGWJEWpRTuukFyOO7xu_kkG_dbteBXayG8'
 bot = Bot(token=TOKEN)
@@ -16,14 +17,18 @@ async def send_telegram_message(message):
 
 def telegram_login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
-        if request.session['is_authenticated'] == True:
-            return view_func(request, *args, **kwargs)
-        return redirect('login page')
+        try:
+            if request.session['is_authenticated'] == True:
+                return view_func(request, *args, **kwargs)
+            return redirect('login page')
+        except KeyError:
+            return redirect('login page')
     return _wrapped_view
 
 @telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
+        ic(request.POST)
         contact_data = request.POST.get('contact_data')
         description = request.POST.get('description')
         sum_of_request = request.POST.get('sum_of_request')
@@ -58,3 +63,7 @@ def main_panel(request):
                         'profile_photo':profile_data['profile_picture'],
                         'first_name':profile_data['first_name'] })
         
+
+def logout(request):
+    request.session['is_authenticated'] = False
+    return redirect('login')
