@@ -128,15 +128,8 @@ USE_TZ = True
 
 #----------------
 #NICE!
-STATIC_URL = "/static/" # Django will search for /src/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'request_panel_site/static'),
-]
-# MEDIA_ROOT = '/home/req_panel_site/public_html/media/'
-# MEDIA_URL = '/media/'
-#----------------
-# Ensure the security settings are appropriate for testing
+STATIC_URL = '/static/'
+STATIC_ROOT = "/home/user/myproject/static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
