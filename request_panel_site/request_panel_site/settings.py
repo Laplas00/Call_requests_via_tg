@@ -129,7 +129,7 @@ USE_TZ = True
 #----------------
 #NICE!
 STATIC_URL = '/static/'
-STATIC_ROOT = "/home/user/myproject/static"
+STATIC_ROOT = "/var/www/html/static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
