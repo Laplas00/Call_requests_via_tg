@@ -48,7 +48,7 @@ def save_telegram_user(data):
             'photo_url': photo_url,})
     
     print('user_created')
-    return [user, created]  # Returns the user instance and a boolean indicating if it was created
+    return user, created  # Returns the user instance and a boolean indicating if it was created
 
 def login_authentication(request):
     if request.method == "GET":
@@ -76,8 +76,8 @@ def login_authentication(request):
             
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
-                to_login = save_telegram_user(data)
-                login(request, to_login[0])
+                user, res = save_telegram_user(data)
+                login(request, user)
                 print('save complete')
                 return redirect('main_panel')
             else:
