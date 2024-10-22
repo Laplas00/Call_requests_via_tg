@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&(9v#1oxj(knjv0*fd^ih__t(*$*#z785alv=l_e-ycfjr_7c('
 DEBUG = True
 
-ALLOWED_HOSTS = ['116.203.69.73', 'localhost', 'https://salesarm.multywhale.pro',
+ALLOWED_HOSTS = ['116.203.69.73', 'localhost',
                  'salesarm.multywhale.pro', 'www.salesarm.multywhale.pro']
 
 
@@ -47,7 +47,10 @@ MIDDLEWARE = [
 
 CSP_DEFAULT_SRC = ("'self'", '*')
 CSP_FRAME_ANCESTORS = ("'self'", "*")
-SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+# SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+CSRF_TRUSTED_ORIGINS = [
+    'https://salesarm.multywhale.pro',
+]
 
 ROOT_URLCONF = 'request_panel_site.urls'
 
