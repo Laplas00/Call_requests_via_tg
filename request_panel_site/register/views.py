@@ -69,9 +69,9 @@ def login_authentication(request):
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
                 save_telegram_user(data)
-                return ('main_panel')
+                redirect('main_panel')
 
-    return redirect('login')
+    return redirect('login_page')
 
 
 def get_staff_members():
