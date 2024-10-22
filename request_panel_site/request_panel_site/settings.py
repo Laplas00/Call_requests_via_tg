@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&(9v#1oxj(knjv0*fd^ih__t(*$*#z785alv=l_e-ycfjr_7c('
 DEBUG = True
 
-ALLOWED_HOSTS = ['116.203.69.73', 'localhost',
+ALLOWED_HOSTS = ['116.203.69.73', 'localhost', 'https://salesarm.multywhale.pro',
                  'salesarm.multywhale.pro', 'www.salesarm.multywhale.pro']
 
 
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
 TELEGRAM_BOT_NAME = 'Login_TGKitGroupBot'
 TELEGRAM_BOT_TOKEN = '8106105403:AAHNSy5s0pfl9DLC-42nPdaHWoPx_KlwFNI'
-TELEGRAM_LOGIN_REDIRECT_URL = 'http://0.0.0.0:8000'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
