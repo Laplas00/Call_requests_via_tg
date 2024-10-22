@@ -54,7 +54,7 @@ def login_authentication(request):
         if request.GET.get('hash'):
             ic('hash was found')
             data = request.GET
-            
+            ic(data)
             try:
                 result = verify_telegram_authentication(bot_token=TELEGRAM_BOT_TOKEN, request_data=request.GET)
 
@@ -63,9 +63,10 @@ def login_authentication(request):
 
             except NotTelegramDataError:
                 return HttpResponse('The data is not related to Telegram!')
-
-            doc_values = get_staff_members()
-            if data.get('username')[0] in (doc_values.admins.values, doc_values.managers.values):
+            
+            user_username = data.get('username')[0]
+            doc_data = get_staff_members()
+            if user_username in doc_data.admins.values or user_username in doc_data.managers.values):
                 # validation of manager ixist in db
                 save_telegram_user(data)
                 return ('main_panel')
