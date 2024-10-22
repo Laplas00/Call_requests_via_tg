@@ -5,7 +5,7 @@ class TelegramUser (models.Model):
     first_name = models.CharField(max_length=255)  # Store the user's first name
     username = models.CharField(max_length=255, unique=True, null=True)  # Store the username, allow null
     photo_url = models.URLField(max_length=2000, null=True)  # Store the photo URL, allow null
-    auth_date = models.DateTimeField(null=True, blank=True)  # Add this field
+    auth_date = models.CharField(max_length=255, null=False)  # Add this field
 
     def __str__(self):
         return f"{self.first_name} ({self.username})"
