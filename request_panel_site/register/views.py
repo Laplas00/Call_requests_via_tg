@@ -34,7 +34,7 @@ def login_view(request):
 
 def save_telegram_user(data):
     user_id = int(data.get('id')[0])
-    first_name = data.get('first_name')[0]
+    first_name = data.get('first_name')[0] if data.get('first_name') else None
     username = data.get('username')[0] if data.get('username') else None
     photo_url = data.get('photo_url')[0] if data.get('photo_url') else None
 
@@ -65,10 +65,12 @@ def login_authentication(request):
                 return HttpResponse('The data is not related to Telegram!')
             
             user_username = data.get('username')[0] if data.get('username') else None
+            print(user_username)
             doc_data = get_staff_members()
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
                 save_telegram_user(data)
+                print('save complete')
                 return redirect('main_panel')
             else:
                 print(f'user {user_username} not in doc values')
