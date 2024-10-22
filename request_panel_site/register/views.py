@@ -69,7 +69,12 @@ def login_authentication(request):
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
                 save_telegram_user(data)
-                redirect('main_panel')
+                return redirect('main_panel')
+            else:
+                print(f'user {user_username} not in doc values')
+        else:
+            print('no hash')
+            return redirect('login_page')
 
     return redirect('login_page')
 
