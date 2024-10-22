@@ -37,6 +37,7 @@ def main_panel(request):
         print(description)
         print(sum_of_request)
         print(currency_of_request)
+        user_id = request.session['id']
         user = TelegramUser.objects.get(id=user_id)
 
         message = f'''
