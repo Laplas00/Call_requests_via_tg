@@ -131,8 +131,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = "/var/www/html/static"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Adjust this path to your project's static files directory
-    '/var/www/html/static'
+    BASE_DIR / "static"  # Adjust this path to your project's static files directory
     # Add other directories as needed
 ]
 
