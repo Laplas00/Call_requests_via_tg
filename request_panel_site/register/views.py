@@ -8,6 +8,7 @@ from django_telegram_login.authentication import verify_telegram_authentication
 from django_telegram_login.errors import (
     NotTelegramDataError,TelegramDataIsOutdatedError,)
 import pandas as pd
+from django.contrib.auth import login
 
 from request_panel_site.settings import TELEGRAM_BOT_TOKEN 
 
@@ -47,7 +48,7 @@ def save_telegram_user(data):
             'photo_url': photo_url,})
     
     print('user_created')
-    return user, created  # Returns the user instance and a boolean indicating if it was created
+    return [user, created]  # Returns the user instance and a boolean indicating if it was created
 
 def login_authentication(request):
     if request.method == "GET":
@@ -75,7 +76,8 @@ def login_authentication(request):
             
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
-                save_telegram_user(data)
+                to_login = save_telegram_user(data)
+                login(request, to_login[0])
                 print('save complete')
                 return redirect('main_panel')
             else:
