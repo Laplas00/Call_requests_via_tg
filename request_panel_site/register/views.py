@@ -55,6 +55,10 @@ def login_authentication(request):
         if request.user.is_authenticated:
             print('user is authenticated')
             return redirect('main_panel')
+        else:
+            print(request)
+            print(request.user)
+            print('--')
 
         if request.GET.get('hash'):
             ic('hash was found')
