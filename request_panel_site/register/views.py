@@ -28,9 +28,7 @@ def login_view(request):
 
 def login_authentication(request):
     if request.method == "GET":
-        ic(request.body)
-        ic(request.GET.body)
-        ic(request.GET.body())
+        ic(request.GET)
         request.GET.get('hash')
         print('hash was found')
 
