@@ -66,7 +66,7 @@ def login_authentication(request):
             
             user_username = data.get('username')[0]
             doc_data = get_staff_members()
-            if user_username in doc_data.admins.values or user_username in doc_data.managers.values):
+            if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
                 save_telegram_user(data)
                 return ('main_panel')
