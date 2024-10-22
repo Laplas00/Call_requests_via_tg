@@ -37,7 +37,11 @@ def main_panel(request):
         print(description)
         print(sum_of_request)
         print(currency_of_request)
+        user = TelegramUser.objects.get(id=user_id)
+
         message = f'''
+От: {user.username}
+    
 Контакт: {contact_data}
 Описание: {description}
 Сумма запроса: {sum_of_request}
