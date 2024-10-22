@@ -66,4 +66,4 @@ def main_panel(request):
 
 def logout(request):
     request.session['is_authenticated'] = False
-    return redirect('login')
+    return redirect('login_page')
