@@ -134,7 +134,7 @@ STATIC_ROOT = "/var/www/html/staticfiles"
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static", 
+    BASE_DIR / "request_panel_site/static", 
 ]
 
 # Default primary key field type
