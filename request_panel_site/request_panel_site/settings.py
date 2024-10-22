@@ -128,11 +128,8 @@ USE_TZ = True
 
 #----------------
 #NICE!
-STATIC_URL = "/src/" # Django will search for /src/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "src"), # Django will search for /src/
-]
-STATIC_ROOT = "static/"# Basic configuration when using manage.py collectstatic
+STATIC_URL = "/static/" # Django will search for /src/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'request_panel_site/static'),
 ]
