@@ -54,9 +54,10 @@ def save_telegram_user(data):
 
 def login_authentication(request):
     if request.method == "GET":
-        if request.session['is_authenticated'] == True:
-            print('user is authenticated')
-            return redirect('main_panel')
+        if 'is_authenticated' in request.session:
+            if request.session['is_authenticated'] == True:
+                print('user is authenticated')
+                return redirect('main_panel')
         else:
             print(request)
             print(request.user)
