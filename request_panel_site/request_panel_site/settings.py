@@ -127,9 +127,7 @@ USE_TZ = True
 
 
 #----------------
-#NICE!
-
-# collectstatic will collect data here
+#NICE!# collectstatic will collect data here
 STATIC_ROOT = "/var/www/html/staticfiles"
 
 # where url finding static by path
