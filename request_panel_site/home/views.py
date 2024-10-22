@@ -47,7 +47,7 @@ def main_panel(request):
 
         profile_data = {
             'first_name': user.first_name,  # Assuming you have this field
-            'profile_picture': user.profile_picture.url if user.profile_picture else None,  # Assuming you have this field
+            'profile_picture': user.photo_url,  # Assuming you have this field
         }
         
         # Step 4: Return the profile data as a JSON response
