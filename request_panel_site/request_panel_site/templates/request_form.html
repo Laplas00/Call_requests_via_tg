@@ -35,9 +35,9 @@
                     <div class="col-md-6 mb-3">
                         <label for="validationTooltip03">Валюта</label>
                         <select class="custom-select" name='currency_of_request', required="">
-                            <option value="1" name="one">One</option>
-                            <option value="2" name="two">Two</option>
-                            <option value="3" name="three">Three</option>
+                            {% for currency in currencies %}
+                                <option value="{{ currency }}">{{ currency }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>

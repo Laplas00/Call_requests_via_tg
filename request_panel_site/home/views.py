@@ -59,16 +59,47 @@ def main_panel(request):
             'first_name': user.first_name,  # Assuming you have this field
             'profile_picture': user.photo_url,  # Assuming you have this field
         }
-        
+        currencies = scrape_google_sheets_currency()
         # Step 4: Return the profile data as a JSON response
         # return JsonResponse(profile_data, status=200)
         print('someone just got access to page')
         return render(request, 'request_form.html',
                         {'title':'Main page',
                         'profile_photo':profile_data['profile_picture'],
-                        'first_name':profile_data['first_name'] })
+                        'first_name':profile_data['first_name'],
+                        'currencies':currencies})
         
 
 def logout(request):
     request.session['is_authenticated'] = False
     return redirect('login_page')
+
+import requests
+from bs4 import BeautifulSoup
+
+url_cods = 'https://docs.google.com/spreadsheets/d/1dJl-3iTEpBWXJjkX183L0sx2FlQCVm4Ci0bc1iMGYhI/edit?gid=617465825#gid=617465825'
+def scrape_google_sheets_currency(url: str = url_cods):
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        table = soup.find('table')
+        if table:
+            data = []
+            for row in table.find_all('tr'):
+                cells = row.find_all('td')
+                if cells:
+                    data.append([cell.text.strip() for cell in cells])
+            currency_dict = {row[0]: row[1] for row in data[1:]}  # Create a dictionary from the data
+            del currency_dict['']
+            
+            currencies = {}
+
+            for key, value in currency_dict.items():
+                currencies[key] = float(value.replace(',', '.'))
+
+            # ic(currency_dict)
+            return currencies
+        else:
+            return "Failed to retrieve data. Check the URL and try again."
+    else:
+        return "Failed to retrieve data. Check the URL and try again."
