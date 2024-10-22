@@ -25,13 +25,37 @@ def login_view(request):
         print(f"Error: {e}")
         return JsonResponse({'message': 'Error occurred'})
     
+# --- Telegram authentication
+
+def save_telegram_user(data):
+    user_id = int(data.get('id')[0])
+    first_name = data.get('first_name')[0]
+    username = data.get('username')[0] if data.get('username') else None
+    photo_url = data.get('photo_url')[0] if data.get('photo_url') else None
+    hash_value = data.get('hash')[0]
+
+    # Create or update the user
+    user, created = TelegramUser .objects.update_or_create(
+        id=user_id,
+        defaults={
+            'first_name': first_name,
+            'username': username,
+            'photo_url': photo_url,
+            'hash': hash_value,})
+    return user, created  # Returns the user instance and a boolean indicating if it was created
 
 def login_authentication(request):
     if request.method == "GET":
         ic(request.GET)
-        request.GET.get('hash')
+        ic(request.GET.get('hash'))
+
         print('hash was found')
 
     return redirect('main_panel')
     
     ...
+
+
+from .models import TelegramUser 
+from django.utils import timezone
+
