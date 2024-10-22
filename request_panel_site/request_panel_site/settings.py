@@ -47,7 +47,7 @@ MIDDLEWARE = [
 
 CSP_DEFAULT_SRC = ("'self'", '*')
 CSP_FRAME_ANCESTORS = ("'self'", "*")
-# SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 CSRF_TRUSTED_ORIGINS = [
     'https://salesarm.multywhale.pro',
 ]
