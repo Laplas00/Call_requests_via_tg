@@ -20,9 +20,9 @@ def telegram_login_required(view_func):
         try:
             if request.session['is_authenticated'] == True:
                 return view_func(request, *args, **kwargs)
-            return redirect('login page')
+            return redirect('login_page')
         except KeyError:
-            return redirect('login page')
+            return redirect('login_page')
     return _wrapped_view
 
 @telegram_login_required
