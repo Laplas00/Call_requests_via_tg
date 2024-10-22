@@ -43,6 +43,8 @@ def save_telegram_user(data):
             'username': username,
             'photo_url': photo_url,
             'hash': hash_value,})
+    
+    print('user_created')
     return user, created  # Returns the user instance and a boolean indicating if it was created
 
 def login_authentication(request):
