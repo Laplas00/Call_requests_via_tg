@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = 'django-insecure-&(9v#1oxj(knjv0*fd^ih__t(*$*#z785alv=l_e-ycfjr_7c('
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['116.203.69.73', 'localhost',
                  'salesarm.multywhale.pro', 'www.salesarm.multywhale.pro']
@@ -128,11 +128,16 @@ USE_TZ = True
 
 #----------------
 #NICE!
+
+# collectstatic will collect data here
+STATIC_ROOT = "/var/www/html/staticfiles"
+
+# where url finding static by path
 STATIC_URL = '/static/'
-STATIC_ROOT = "/var/www/html/static"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static"  # Adjust this path to your project's static files directory
-    # Add other directories as needed
+    BASE_DIR / "static", 
+    BASE_DIR  
 ]
 
 # Default primary key field type
