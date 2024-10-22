@@ -51,6 +51,10 @@ def save_telegram_user(data):
 
 def login_authentication(request):
     if request.method == "GET":
+        if request.user.is_authenticated():
+            print('user is authenticated')
+            return redirect('main_panel')
+
         if request.GET.get('hash'):
             ic('hash was found')
             data = request.GET
