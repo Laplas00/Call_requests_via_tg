@@ -14,7 +14,14 @@ async def send_telegram_message(message):
     await bot.send_message(chat_id='-1002395487349', text=message)
 
 
-@login_required
+def telegram_login_required(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated and isinstance(request.user, TelegramUser ):
+            return view_func(request, *args, **kwargs)
+        return redirect('login page')
+    return _wrapped_view
+
+@telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
         contact_data = request.POST.get('contact_data')

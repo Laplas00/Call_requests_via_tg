@@ -38,6 +38,7 @@ def save_telegram_user(data):
     first_name = data.get('first_name')
     username = data.get('username')
     photo_url = data.get('photo_url')
+    auth_date = data.get('auth_date')
 
     # Create or update the user
     user, created = TelegramUser.objects.update_or_create(
@@ -45,7 +46,8 @@ def save_telegram_user(data):
         defaults={
             'first_name': first_name,
             'username': username,
-            'photo_url': photo_url,})
+            'photo_url': photo_url,
+            'auth_date': auth_date})
     
     print('user_created')
     return user, created  # Returns the user instance and a boolean indicating if it was created
