@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, HttpResponse, redirect
+from .models import TelegramUser 
 import json
 from icecream import ic
 
@@ -35,7 +36,7 @@ def save_telegram_user(data):
     hash_value = data.get('hash')[0]
 
     # Create or update the user
-    user, created = TelegramUser .objects.update_or_create(
+    user, created = TelegramUser.objects.update_or_create(
         id=user_id,
         defaults={
             'first_name': first_name,
@@ -46,10 +47,10 @@ def save_telegram_user(data):
 
 def login_authentication(request):
     if request.method == "GET":
-        ic(request.GET)
-        ic(request.GET.get('hash'))
-
-        print('hash was found')
+        if request.GET.get('hash'):
+            ic('hash was found')
+            data = request.GET
+            save_telegram_user(data)
 
     return redirect('main_panel')
     
