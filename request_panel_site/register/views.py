@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, HttpResponse, redirect
 import json
+from icecream import ic
 
 
 
@@ -27,6 +28,7 @@ def login_view(request):
 
 def login_authentication(request):
     if request.method == "GET":
+        ic(request.body)
         request.GET.get('hash')
         print('hash was found')
 
