@@ -13,40 +13,36 @@
 
         {% include '_partials/_header.html' %}
         <div class="page-body-wrapper">
-            
+
             {% include '_partials/_sidebar.html' %}
-            
+
 
             <div class="page-body">
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="row">
                             <div class="col-lg-6 main-header">
-                                <h2>Sample<span>Page</span></h2>
-                                <h6 class="mb-0">admin panel</h6>
+                                <h2>KitGroup<span>Call</span></h2>
+                                <!-- <h6 class="mb-0">admin panel</h6> -->
                             </div>
-                            <div class="col-lg-6 breadcrumb-right">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="pe-7s-home"></i></a></li>
-                                    <li class="breadcrumb-item">Pages</li>
-                                    <li class="breadcrumb-item active">Sample page</li>
-                                </ol>
-                            </div>
+                            <div class="col-lg-6"></div>
                         </div>
                     </div>
                 </div>
                 <!-- Container-fluid starts-->
-                <div class="container-fluid">
+                <div class="row">
                     <div class="row">
-                        <!-- Content start here -->
-                        {% block content %}
-                        {% endblock %}
+                        <div class="col-lg-8">
+                            <!-- Content start here -->
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                        <div class="col-lg-4"></div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
             </div>
             <!-- footer start-->
-            
+
             {% include '_partials/_footer.html' %}
 
 
