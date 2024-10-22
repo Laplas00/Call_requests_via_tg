@@ -1,3 +1,5 @@
+bs4==0.0.2
+requests==2.32.3
 Django==5.1.2
 django-extensions==3.2.3
 django-telegram-login==0.2.3
