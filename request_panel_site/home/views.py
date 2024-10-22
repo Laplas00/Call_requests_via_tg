@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from telegram import Bot
 import asyncio
-from request_panel_site.register.models import TelegramUser
+from register.models import TelegramUser
 from django.http import JsonResponse
 
 TOKEN = '7342161081:AAGWJEWpRTuukFyOO7xu_kkG_dbteBXayG8'
