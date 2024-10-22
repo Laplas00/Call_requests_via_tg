@@ -64,7 +64,7 @@ def login_authentication(request):
             except NotTelegramDataError:
                 return HttpResponse('The data is not related to Telegram!')
 
-            if data.get('username')[0] in get_staff_members.values:
+            if data.get('username')[0] in (get_staff_members.admins.values, get_staff_members.managers.values):
                 # validation of manager ixist in db
                 save_telegram_user(data)
                 return ('main_panel')
