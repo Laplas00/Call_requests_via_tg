@@ -4,8 +4,12 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import TelegramUser 
 import json
 from icecream import ic
+from django_telegram_login.authentication import verify_telegram_authentication
+from django_telegram_login.errors import (
+    NotTelegramDataError,TelegramDataIsOutdatedError,)
+import pandas as pd
 
-
+from request_panel_site.settings import TELEGRAM_BOT_TOKEN 
 
 def login_page(request):
     content = render(request, 'login_page.html').content
@@ -33,7 +37,6 @@ def save_telegram_user(data):
     first_name = data.get('first_name')[0]
     username = data.get('username')[0] if data.get('username') else None
     photo_url = data.get('photo_url')[0] if data.get('photo_url') else None
-    hash_value = data.get('hash')[0]
 
     # Create or update the user
     user, created = TelegramUser.objects.update_or_create(
@@ -41,8 +44,7 @@ def save_telegram_user(data):
         defaults={
             'first_name': first_name,
             'username': username,
-            'photo_url': photo_url,
-            'hash': hash_value,})
+            'photo_url': photo_url,})
     
     print('user_created')
     return user, created  # Returns the user instance and a boolean indicating if it was created
@@ -52,13 +54,28 @@ def login_authentication(request):
         if request.GET.get('hash'):
             ic('hash was found')
             data = request.GET
-            save_telegram_user(data)
+            
+            try:
+                result = verify_telegram_authentication(bot_token=TELEGRAM_BOT_TOKEN, request_data=request.GET)
 
-    return redirect('main_panel')
-    
-    ...
+            except TelegramDataIsOutdatedError:
+                return HttpResponse('Authentication was received more than a day ago.')
+
+            except NotTelegramDataError:
+                return HttpResponse('The data is not related to Telegram!')
+
+            if data.get('username')[0] in get_staff_members.values:
+                # validation of manager ixist in db
+                save_telegram_user(data)
+                return ('main_panel')
+
+    return redirect('login')
 
 
-from .models import TelegramUser 
-from django.utils import timezone
-
+def get_staff_members():
+    sheet_id = "1dJl-3iTEpBWXJjkX183L0sx2FlQCVm4Ci0bc1iMGYhI"
+    gid = "1496823880"
+    excel = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx&gid={gid}"
+    data = pd.read_excel(excel)
+    data.columns = ['admins', 'managers','another']
+    return data
