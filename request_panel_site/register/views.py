@@ -33,10 +33,10 @@ def login_view(request):
 # --- Telegram authentication
 
 def save_telegram_user(data):
-    user_id = int(data.get('id')[0])
-    first_name = data.get('first_name')[0] if data.get('first_name') else None
-    username = data.get('username')[0] if data.get('username') else None
-    photo_url = data.get('photo_url')[0] if data.get('photo_url') else None
+    user_id = data.get('id')
+    first_name = data.get('first_name')
+    username = data.get('username')
+    photo_url = data.get('photo_url')
 
     # Create or update the user
     user, created = TelegramUser.objects.update_or_create(
@@ -64,9 +64,11 @@ def login_authentication(request):
             except NotTelegramDataError:
                 return HttpResponse('The data is not related to Telegram!')
             
-            user_username = data.get('username')[0] if data.get('username') else None
-            print(user_username)
+            user_username = data.get('username')
             doc_data = get_staff_members()
+            ic(doc_data.admins.values)
+            ic(user_username)
+            
             if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
                 # validation of manager ixist in db
                 save_telegram_user(data)
