@@ -44,12 +44,12 @@ def main_panel(request):
 
         message = f'''
 Вiд: @{user.username}
-    
+
+Місто звернення/заносу: {request_city}
+Місто видачi: {city_out}
 Ім'я клієнта: {contact_name}
 Телефон/Телеграм: {telephone_telegram}
 Опис запиту: {description}
-Місто звернення/заносу: {request_city}
-Місто видачi: {city_out}
 Сума: {sum_of_request} {currency_of_request}
 '''
         asyncio.run(send_telegram_message(message))
