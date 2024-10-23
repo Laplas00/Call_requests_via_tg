@@ -43,7 +43,7 @@ def main_panel(request):
         user = TelegramUser.objects.get(id=user_id)
 
         message = f'''
-Вiд: {user.username}
+Вiд: @{user.username}
     
 Ім'я клієнта: {contact_name}
 Телефон/Телеграм: {telephone_telegram}
