@@ -29,22 +29,27 @@ def telegram_login_required(view_func):
 def main_panel(request):
     if request.method == 'POST':
         ic(request.POST)
-        contact_data = request.POST.get('contact_data')
+        contact_name = request.POST.get('contact_name')
+        telephone_telegram = request.POST.get('telephone_telegram')
         description = request.POST.get('description')
+        request_city = request.POST.get('request_city')
+        city_out = request.POST.get('city_out')
+        
         sum_of_request = request.POST.get('sum_of_request')
         currency_of_request = request.POST.get('currency_of_request')
-        print(contact_data)
-        print(description)
-        print(sum_of_request)
-        print(currency_of_request)
+
+        
         user_id = request.session['id']
         user = TelegramUser.objects.get(id=user_id)
 
         message = f'''
 От: {user.username}
     
-Контакт: {contact_data}
+Імґя клієнта: {contact_name}
+Телефон/Телеграм: {telephone_telegram}
 Описание: {description}
+Місто звернення/заносу: {request_city}
+Місто видачи: {city_out}
 Сумма запроса: {sum_of_request}
 Валюта: {currency_of_request}
 '''

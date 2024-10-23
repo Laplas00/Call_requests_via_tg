@@ -11,9 +11,15 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group row">
-                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Контакт</label>
+                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Імґя клієнта</label>
                     <div class="col-lg-12">
-                        <input id="contact_data" name="contact_data" type="text" placeholder=""
+                        <input id="contact_name" name="contact_name" type="text" placeholder=""
+                            class="form-control btn-square input-md">
+                    </div>
+
+                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Телефон/Телеграм</label>
+                    <div class="col-lg-12">
+                        <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder=""
                             class="form-control btn-square input-md">
                     </div>
 
@@ -25,6 +31,22 @@
 
                 </div>
                 
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="validationTooltip03">Місто звернення/заносу</label>
+                        <input class="form-control" name='request_city', id="request_city" type="text" placeholder=""
+                            required="">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationTooltip03">Місто видачи</label>
+                        <select class="custom-select" name='city_out', required="">
+                            {% for currency in currencies %}
+                                <option value="{{ currency }}">{{ currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
