@@ -8,20 +8,30 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Нова заявка</h5>
+            
+            
             <form method="post">
+                {% csrf_token %}
+
                 <div class="container-fluid">
                     <div class="form-group row">
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-lg-12 control-label text-lg-left" for="textinput">One</label>
+                                <label class="col-lg-6 control-label text-lg-left" for="textinput">Ім'я клієнта</label>
+                                <input id="contact_name" name="contact_name" type="text" placeholder="" class="form-control btn-square input-md">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-lg-6 control-label text-lg-left" for="textinput">Телефон/Телеграм</label>
                                 <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder="" class="form-control btn-square input-md">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="col-lg-12 control-label text-lg-left" for="textinput">Two</label>
-                                <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder="" class="form-control btn-square input-md">
+                                <label class="col-lg-12 control-label text-lg-left" for="textinput">Опис запиту</label>
+                                <textarea id="description" name="description" type="text" placeholder="" class="form-control btn-square input-md"></textarea>
                             </div>
                         </div>
                     </div>
@@ -32,17 +42,7 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group row">
-                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Ім'я клієнта</label>
-                    <div class="col-lg-12">
-                        <input id="contact_name" name="contact_name" type="text" placeholder=""
-                            class="form-control btn-square input-md">
-                    </div>
-
-                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Телефон/Телеграм</label>
-                    <div class="col-lg-12">
-                        <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder=""
-                            class="form-control btn-square input-md">
-                    </div>
+                    
 
                     <label class="col-lg-12 control-label text-lg-left" for="textinput">Опис запиту</label>
                     <div class="col-lg-12">
