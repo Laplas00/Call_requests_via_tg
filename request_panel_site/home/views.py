@@ -50,8 +50,7 @@ def main_panel(request):
 Описание: {description}
 Місто звернення/заносу: {request_city}
 Місто видачи: {city_out}
-Сумма запроса: {sum_of_request}
-Валюта: {currency_of_request}
+Сумма запроса: {sum_of_request} {currency_of_request}
 '''
         asyncio.run(send_telegram_message(message))
         # -1002395487349
@@ -69,7 +68,7 @@ def main_panel(request):
         # return JsonResponse(profile_data, status=200)
         print('someone just got access to page')
         return render(request, 'request_form.html',
-                        {'title':'Main page',
+                        {'title':'Створення заявки',
                         'profile_photo':profile_data['profile_picture'],
                         'first_name':profile_data['first_name'],
                         'currencies':currencies})
