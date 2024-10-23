@@ -21,13 +21,15 @@
         <div class="vertical-mobile-sidebar"><i class="fa fa-bars sidebar-bar"> </i></div>
         <div class="nav-right col pull-right right-menu">
             <ul class="nav-menus">
-                <li></li>
-                <img src="{{ profile_photo }}" 
-                    alt="" 
-                    width="50" 
-                    height="50" 
-                    class="img-thumbnail">
+                <li>
+                  
+                </li>
+                <li>{{ first_name }}</li>
+                <li> 
+                    <img class="img-fluid" src="{{ profile_photo }}" alt="" style="height: 50px;width: 50px;">
+                </li>
             </ul>
+            
             <div class="d-lg-none mobile-toggle pull-right"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal">
