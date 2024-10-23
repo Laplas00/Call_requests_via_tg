@@ -43,14 +43,14 @@ def main_panel(request):
         user = TelegramUser.objects.get(id=user_id)
 
         message = f'''
-От: {user.username}
+Вiд: {user.username}
     
 Ім'я клієнта: {contact_name}
 Телефон/Телеграм: {telephone_telegram}
-Описание: {description}
+Опис запиту: {description}
 Місто звернення/заносу: {request_city}
 Місто видачи: {city_out}
-Сумма запроса: {sum_of_request} {currency_of_request}
+Сума: {sum_of_request} {currency_of_request}
 '''
         asyncio.run(send_telegram_message(message))
         # -1002395487349
