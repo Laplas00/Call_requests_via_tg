@@ -9,6 +9,17 @@
         <div class="card-body">
             <h5 class="card-title">Нова заявка</h5>
             <form method="post">
+                <div class="container-fluid">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label text-lg-left" for="textinput">Телефон/Телеграм</label>
+                            <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder="" class="form-control btn-square input-md">
+                        </div>
+                    </div>
+                </div>
+                
+
+            <form method="post">
                 {% csrf_token %}
                 <div class="form-group row">
                     <label class="col-lg-12 control-label text-lg-left" for="textinput">Ім'я клієнта</label>
