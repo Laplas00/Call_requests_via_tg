@@ -60,7 +60,8 @@ def main_panel(request):
         user = TelegramUser.objects.get(id=user_id)
 
         profile_data = {
-            'first_name': user.first_name,  # Assuming you have this field
+            'first_name': user.first_name,
+            'username':user.username,  # Assuming you have this field
             'profile_picture': user.photo_url,  # Assuming you have this field
         }
         currencies = scrape_google_sheets_currency()
@@ -71,6 +72,7 @@ def main_panel(request):
                         {'title':'Створення заявки',
                         'profile_photo':profile_data['profile_picture'],
                         'first_name':profile_data['first_name'],
+                        'username':profile_data['username'],
                         'currencies':currencies})
         
 
