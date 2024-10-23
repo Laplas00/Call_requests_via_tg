@@ -45,7 +45,7 @@ def main_panel(request):
         message = f'''
 От: {user.username}
     
-Імґя клієнта: {contact_name}
+Ім'я клієнта: {contact_name}
 Телефон/Телеграм: {telephone_telegram}
 Описание: {description}
 Місто звернення/заносу: {request_city}
