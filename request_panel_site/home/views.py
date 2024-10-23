@@ -49,7 +49,7 @@ def main_panel(request):
 Телефон/Телеграм: {telephone_telegram}
 Опис запиту: {description}
 Місто звернення/заносу: {request_city}
-Місто видачи: {city_out}
+Місто видачi: {city_out}
 Сума: {sum_of_request} {currency_of_request}
 '''
         asyncio.run(send_telegram_message(message))
