@@ -30,63 +30,44 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label for="validationTooltip03">Місто звернення/заносу</label>
+                                <input class="form-control" name='request_city', id="request_city" type="text" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="validationTooltip03">Місто видачі</label>
+                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="validationTooltip03">Сума</label>
+                                <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="validationTooltip03">Валюта</label>
+                                <select class="custom-select" name='currency_of_request', required="">
+                                    {% for currency in currencies %}
+                                        <option value="{{ currency }}">{{ currency }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
                                 <label class="col-lg-12 control-label text-lg-left" for="textinput">Опис запиту</label>
                                 <textarea id="description" name="description" type="text" placeholder="" class="form-control btn-square input-md"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-                
-
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group row">
-                    
-
-                    <label class="col-lg-12 control-label text-lg-left" for="textinput">Опис запиту</label>
-                    <div class="col-lg-12">
-                        <textarea id="description" name="description" type="text" placeholder=""
-                            class="form-control btn-square input-md"></textarea>
-                    </div>
-
-                </div>
-                
-                <div class="form-row"></div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationTooltip03">Місто звернення/заносу</label>
-                        <input class="form-control" name='request_city', id="request_city" type="text" placeholder=""
-                        required="">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationTooltip03">Місто видачі</label>
-                        
-                        <input class="form-control" name='city_out', id="city_out" type="text" placeholder=""
-                        required="">
-                        
-                    </div>
-                </div>
-                <div class="form-row"></div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationTooltip03">Сума</label>
-                        <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder=""
-                            required="">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationTooltip03">Валюта</label>
-                        <select class="custom-select" name='currency_of_request', required="">
-                            {% for currency in currencies %}
-                                <option value="{{ currency }}">{{ currency }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
                 <button type="submit" class="btn btn-primary">Відправити заявку</button>
+
             </form>
+
         </div>
     </div>
 </div>
