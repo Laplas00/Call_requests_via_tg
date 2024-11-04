@@ -75,9 +75,9 @@ def login_authentication(request):
                 ic(doc_data.admins.values)
                 ic(user_username)
                 
-                if user_username in doc_data.admins.values or user_username in doc_data.managers.values:
+                if user_username in (doc_data.admins.values, doc_data.managers.values, doc_data.another.values):
                     # validation of manager ixist in db
-                    print('user in doc_data admins or managerss')
+                    print('user in doc_data admins or managerss or another')
                     save_telegram_user(data)
                     request.session['is_authenticated'] = True
                     request.session['id'] = data.get('id')

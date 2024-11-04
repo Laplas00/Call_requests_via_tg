@@ -6,9 +6,18 @@ import asyncio
 from register.models import TelegramUser
 from django.http import JsonResponse
 from icecream import ic
+from django.contrib import messages
+import requests as r
 
 TOKEN = '7342161081:AAGWJEWpRTuukFyOO7xu_kkG_dbteBXayG8'
 bot = Bot(token=TOKEN)
+
+api_url = 'http://49.13.205.34:8060'
+headers = {
+    'access':'application/json',
+    'Content-Type': 'application/json'
+}
+
 
 async def send_telegram_message(message):
     bot = Bot(token=TOKEN)
@@ -25,7 +34,7 @@ def telegram_login_required(view_func):
             return redirect('login_page')
     return _wrapped_view
 
-@telegram_login_required
+# @telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
         ic(request.POST)
@@ -52,7 +61,23 @@ def main_panel(request):
 Опис запиту: {description}
 Сума: {sum_of_request} {currency_of_request}
 '''
-        asyncio.run(send_telegram_message(message))
+        data = {
+            'from_manager':user.username,
+            'request_city':request_city,
+            'issuing_city':city_out,
+            'client_name':contact_name,
+            'client_phone':telephone_telegram,
+            'request_description':description,
+            'request_sum':f'{sum_of_request} {currencies}'
+        }
+        result = asyncio.run(send_telegram_message(message))
+        res = r.post(f"{api_url}/call_request", headers=headers, json=data)
+        if res.status_code == 200:
+            messages.info(request, 'Okay')
+        else:
+            messages.error(request, str(res.status_code))
+
+        messages.info(request, str(result))
         # -1002395487349
         return redirect('main_panel')  # Redirect to a success page
     elif request.method == 'GET':
@@ -65,6 +90,11 @@ def main_panel(request):
             'profile_picture': user.photo_url,  # Assuming you have this field
         }
         currencies = scrape_google_sheets_currency()
+        cities = ["Рівне","Вінниця",
+            "Кропивницький","Черкаси","Дніпро","Тернопіль","Хмельницький",
+            "Кривий Ріг","Ужгород","Київ","Запоріжжя","Миколаїв","Суми",
+            "Чернігів","Чернівці","Івано-Франківськ","Житомир",
+            "Луцьк","Харків", "Кременчук", "Полтава", "Мукачево",]
         # Step 4: Return the profile data as a JSON response
         # return JsonResponse(profile_data, status=200)
         print('someone just got access to page')
@@ -73,6 +103,7 @@ def main_panel(request):
                         'profile_photo':profile_data['profile_picture'],
                         'first_name':profile_data['first_name'],
                         'username':profile_data['username'],
+                        'cities':cities,
                         'currencies':currencies})
         
 
