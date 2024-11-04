@@ -73,7 +73,7 @@ def main_panel(request):
         result = asyncio.run(send_telegram_message(message))
         res = r.post(f"{api_url}/call_request", headers=headers, json=data)
         if res.status_code == 200:
-            messages.info(request, 'Okay')
+            messages.success(request, 'Okay')
         else:
             messages.error(request, str(res.status_code))
 
