@@ -40,30 +40,28 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- old -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Місто звернення/заносу</label>
                                 <input class="form-control" name='request_city', id="request_city" type="text" placeholder="" required>
                             </div>
                         </div>
-                        <!--  -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Місто видачі</label>
-                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="">
+                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="" required="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Сума</label>
-                                <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder="">
+                                <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder="" required="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Валюта</label>
-                                <select class="custom-select" name='currency_of_request'>
+                                <select class="custom-select" name='currency_of_request', required="">
                                     {% for currency in currencies %}
                                         <option value="{{ currency }}">{{ currency }}</option>
                                     {% endfor %}
