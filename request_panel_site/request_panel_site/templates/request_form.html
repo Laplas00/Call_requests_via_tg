@@ -31,8 +31,8 @@
                         <!--  -->
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="validationTooltip03">Виберіть опцію</label>
-                                <select class="form-control" name="option_select" id="option_select" required>
+                                <label for="validationTooltip03">Місто звернення/заносу</label>
+                                <select class="form-control" name="request_city" id="request_city" required>
                                     <option value="" disabled selected>Оберіть місто</option>
                                     {% for city in cities %}
                                     <option value="{{city}}">{{city}}</option>
@@ -42,14 +42,13 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="validationTooltip03">Місто звернення/заносу</label>
-                                <input class="form-control" name='request_city', id="request_city" type="text" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
                                 <label for="validationTooltip03">Місто видачі</label>
-                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="" required="">
+                                <select class="form-control" name="city_out" id="city_out" required>
+                                    <option value="" disabled selected>Оберіть місто</option>
+                                    {% for city in cities %}
+                                    <option value="{{city}}">{{city}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6">
