@@ -42,7 +42,7 @@
                     {% if messages %}
                     <div class="alert alert-dismissible fade show" role="alert">
                         {% for message in messages %}
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert {{ message.tags }} role="alert">
                                 {{ message }}
                             </div>
                         {% endfor %}
