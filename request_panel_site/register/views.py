@@ -75,7 +75,7 @@ def login_authentication(request):
                 ic(doc_data.admins.values)
                 ic(user_username)
                 
-                if any(user_username in array for array in (data.managers.values, data.admins.values, data.another.values)):
+                if any(user_username in array for array in (doc_data.managers.values, doc_data.admins.values, doc_data.another.values)):
                     # validation of manager ixist in db
                     print('user in doc_data admins or managerss or another')
                     save_telegram_user(data)
