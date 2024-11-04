@@ -6,6 +6,7 @@ import asyncio
 from register.models import TelegramUser
 from django.http import JsonResponse
 from icecream import ic
+from django.contrib import messages
 
 TOKEN = '7342161081:AAGWJEWpRTuukFyOO7xu_kkG_dbteBXayG8'
 bot = Bot(token=TOKEN)
@@ -25,7 +26,7 @@ def telegram_login_required(view_func):
             return redirect('login_page')
     return _wrapped_view
 
-@telegram_login_required
+# @telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
         ic(request.POST)
@@ -52,7 +53,9 @@ def main_panel(request):
 Опис запиту: {description}
 Сума: {sum_of_request} {currency_of_request}
 '''
-        asyncio.run(send_telegram_message(message))
+        result = asyncio.run(send_telegram_message(message))
+
+        messages.info(request, str(result))
         # -1002395487349
         return redirect('main_panel')  # Redirect to a success page
     elif request.method == 'GET':

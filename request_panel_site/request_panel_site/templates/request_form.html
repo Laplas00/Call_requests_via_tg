@@ -25,31 +25,45 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="control-label text-lg-left" for="textinput">Телефон/Телеграм</label>
-                                <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder="" class="form-control btn-square input-md">
+                                <input id="telephone_telegram" name="telephone_telegram" type="text" placeholder="" class="form-control btn-square input-md" required>
                             </div>
                         </div>
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="validationTooltip03">Виберіть опцію</label>
+                                <select class="form-control" name="option_select" id="option_select">
+                                    <option value="" disabled selected>Оберіть опцію...</option>
+                                    <option value="1">Опція 1</option>
+                                    <option value="2">Опція 2</option>
+                                    <option value="3">Опція 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- old -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Місто звернення/заносу</label>
-                                <input class="form-control" name='request_city', id="request_city" type="text" placeholder="" required="">
+                                <input class="form-control" name='request_city', id="request_city" type="text" placeholder="" required>
                             </div>
                         </div>
+                        <!--  -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Місто видачі</label>
-                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="" required="">
+                                <input class="form-control" name='city_out', id="city_out" type="text" placeholder="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Сума</label>
-                                <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder="" required="">
+                                <input class="form-control" name='sum_of_request', id="validationTooltip03" type="text" placeholder="">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="validationTooltip03">Валюта</label>
-                                <select class="custom-select" name='currency_of_request', required="">
+                                <select class="custom-select" name='currency_of_request'>
                                     {% for currency in currencies %}
                                         <option value="{{ currency }}">{{ currency }}</option>
                                     {% endfor %}
