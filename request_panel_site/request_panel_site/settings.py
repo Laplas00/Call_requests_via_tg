@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = 'django-insecure-&(9v#1oxj(knjv0*fd^ih__t(*$*#z785alv=l_e-ycfjr_7c('
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['116.203.69.73', 'localhost',
                  'salesarm.multywhale.pro', 'www.salesarm.multywhale.pro']
@@ -39,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'csp.middleware.CSPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-  'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'register.csp_middleware.CSPMiddleware',

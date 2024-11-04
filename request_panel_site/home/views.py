@@ -34,7 +34,7 @@ def telegram_login_required(view_func):
             return redirect('login_page')
     return _wrapped_view
 
-# # @telegram_login_required
+# @telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
         ic(request.POST)
