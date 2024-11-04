@@ -68,7 +68,7 @@ def main_panel(request):
             'client_name':contact_name,
             'client_phone':telephone_telegram,
             'request_description':description,
-            'request_sum':f'{sum_of_request} {currencies}'
+            'request_sum':f'{sum_of_request} {currency_of_request}'
         }
         result = asyncio.run(send_telegram_message(message))
         res = r.post(f"{api_url}/call_request", headers=headers, json=data)
