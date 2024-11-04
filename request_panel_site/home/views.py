@@ -20,8 +20,13 @@ headers = {
 
 
 async def send_telegram_message(message):
-    bot = Bot(token=TOKEN)
-    await bot.send_message(chat_id='-1002395487349', text=message)
+    try:
+        bot = Bot(token=TOKEN)
+        await bot.send_message(chat_id='-1002395487349', text=message)
+        return True
+    except:
+        return None
+
 
 
 def telegram_login_required(view_func):
@@ -34,7 +39,7 @@ def telegram_login_required(view_func):
             return redirect('login_page')
     return _wrapped_view
 
-# @telegram_login_required
+@telegram_login_required
 def main_panel(request):
     if request.method == 'POST':
         ic(request.POST)
@@ -78,7 +83,7 @@ def main_panel(request):
             messages.error(request, str(f'Error with status code: {res.status_code}'))
 
         messages.info(request, str(f'Result: {result}'))
-        # -1002395487349
+        
         return redirect('main_panel')  # Redirect to a success page
     elif request.method == 'GET':
         user_id = request.session['id']
@@ -106,6 +111,25 @@ def main_panel(request):
                         'cities':cities,
                         'currencies':currencies})
         
+
+@telegram_login_required
+def request_loader(request):
+    if request.method == 'GET':
+        user_id = request.session['id']
+        user = TelegramUser.objects.get(id=user_id)
+
+        profile_data = {
+            'first_name': user.first_name,
+            'username':user.username,  # Assuming you have this field
+            'profile_picture': user.photo_url,  # Assuming you have this field
+        }
+    return render(request, 'load_call.html',
+                    {'title':'DataLoad',
+                    'profile_photo':profile_data['profile_picture'],
+                    'first_name':profile_data['first_name'],
+                    'username':profile_data['username'],})
+    
+
 
 def logout(request):
     request.session['is_authenticated'] = False
