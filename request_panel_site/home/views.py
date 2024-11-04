@@ -75,9 +75,9 @@ def main_panel(request):
         if res.status_code == 200:
             messages.success(request, 'Okay')
         else:
-            messages.error(request, str(res.status_code))
+            messages.error(request, str(f'Error with status code: {res.status_code}'))
 
-        messages.info(request, str(result))
+        messages.info(request, str(f'Result: {result}'))
         # -1002395487349
         return redirect('main_panel')  # Redirect to a success page
     elif request.method == 'GET':
