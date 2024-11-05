@@ -11,26 +11,26 @@
             <form method="post">
                 {% csrf_token %}
 
-                <div class="container-fluid">
-                    <h5 class="card-title">Нова заявка</h5>
+                <h5 class="card-title">Вивантаження даних</h5>
+                    <div class="container-fluid">
 
                     <div class="row">
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="control-label text-lg-left" for="date">Ім'я клієнта</label>
+                                <label class="control-label text-lg-left" for="date">Початкова дата статистики</label>
                                 <input id="contact_name" name="contact_name" type="date" placeholder="" class="form-control btn-square input-md">
                             </div>
                         </div>
                         
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="control-label text-lg-left" for="date">Ім'я клієнта</label>
+                                <label class="control-label text-lg-left" for="date">До: </label>
                                 <input id="contact_name" name="contact_name" type="date" placeholder="" class="form-control btn-square input-md">
                             </div>
                         </div>
                         
-                    <button type="submit" class="btn btn-primary">Відправити заявку</button>
+                    <button type="submit" class="btn btn-primary">Вивантаження</button>
                 </div>
 
             </form>
@@ -39,15 +39,6 @@
     </div>
 </div>
 
-<div class="form-group form-row">
-    <label class="col-sm-3 col-form-label text-right">Minimum and maximum dates</label>
-    <div class="col-xl-5 col-sm-9">
-        <input class="form-control digits" id="minMaxExample" type="date">
-    </div>
-    <div class="col-xl-5 col-sm-9">"
-        <input class="form-control digits" id="minMaxExample" type="date">
-    </div>
-</div>
 
 
 {% endblock %}
