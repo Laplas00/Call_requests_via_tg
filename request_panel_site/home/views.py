@@ -2,12 +2,15 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from telegram import Bot
+from django.http import HttpResponse
 import asyncio
 from register.models import TelegramUser
 from django.http import JsonResponse
 from icecream import ic
 from django.contrib import messages
 import requests as r
+from openpyxl import Workbook
+from datetime import datetime
 
 TOKEN = '7342161081:AAGWJEWpRTuukFyOO7xu_kkG_dbteBXayG8'
 bot = Bot(token=TOKEN)
@@ -131,16 +134,41 @@ def request_loader(request):
     elif request.method == "POST":
         data_from = request.POST.get('from_date')
         data_to = request.POST.get('to_date')
+        from_date = datetime.strptime(data_from, '%Y-%m-%d')
+        to_date = datetime.strptime(data_to, '%Y-%m-%d')
+
+        print(data_from)
+        print(data_to)
         res = r.get(f"{api_url}/call_request")
         if res.status_code == 200:
             messages.success(request, 'Okay')
         else:
             messages.error(request, str(f'Error with status code: {res.status_code}\n And text {res.text}'))
 
-        for i in res.json():
-            print(i)
-        return redirect('request_loader')
+        filtered_data = []
 
+        for i in res.json():
+            request_time = datetime.strptime(i['time_of_creating_request'], '%Y-%m-%d %H:%M:%S.%f')
+            if from_date <= request_time <= to_date:
+                filtered_data.append(i)
+
+        # Create an XLSX file
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Filtered Data"
+
+        # Write header
+        ws.append(["ID", "Time of Creating Request", "Other Fields..."])  # Adjust headers as necessary
+
+        # Write data rows
+        for item in filtered_data:
+            ws.append([item['id'], item['time_of_creating_request'], item.get('other_field', '')])  # Adjust fields as necessary
+
+        # Create a response object
+        response = HttpResponse(content=wb.save(response), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="filtered_data.xlsx"'
+
+        return response
     
 
 
