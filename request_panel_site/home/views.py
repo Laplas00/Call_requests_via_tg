@@ -72,7 +72,7 @@ def main_panel(request):
             'issuing_city':city_out,
             'client_name':contact_name,
             'client_phone':telephone_telegram,
-            'request_description':description,
+            'request_discription':description,
             'request_sum':f'{sum_of_request} {currency_of_request}'
         }
         result = asyncio.run(send_telegram_message(message))
