@@ -114,64 +114,6 @@ def main_panel(request):
                         'cities':cities,
                         'currencies':currencies})
         
-
-@telegram_login_required
-def request_loader(request):
-    if request.method == 'GET':
-        user_id = request.session['id']
-        user = TelegramUser.objects.get(id=user_id)
-
-        profile_data = {
-            'first_name': user.first_name,
-            'username':user.username,  # Assuming you have this field
-            'profile_picture': user.photo_url,  # Assuming you have this field
-        }
-        return render(request, 'load_call.html',
-                        {'title':'DataLoad',
-                        'profile_photo':profile_data['profile_picture'],
-                        'first_name':profile_data['first_name'],
-                        'username':profile_data['username'],})
-    elif request.method == "POST":
-        data_from = request.POST.get('from_date')
-        data_to = request.POST.get('to_date')
-        from_date = datetime.strptime(data_from, '%Y-%m-%d')
-        to_date = datetime.strptime(data_to, '%Y-%m-%d')
-
-        print(data_from)
-        print(data_to)
-        res = r.get(f"{api_url}/call_request")
-        if res.status_code == 200:
-            messages.success(request, 'Okay')
-        else:
-            messages.error(request, str(f'Error with status code: {res.status_code}\n And text {res.text}'))
-
-        filtered_data = []
-
-        for i in res.json():
-            request_time = datetime.strptime(i['time_of_creating_request'], '%Y-%m-%d %H:%M:%S.%f')
-            if from_date <= request_time <= to_date:
-                filtered_data.append(i)
-
-        # Create an XLSX file
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Filtered Data"
-
-        # Write header
-        ws.append(["ID", "Time of Creating Request", "Other Fields..."])  # Adjust headers as necessary
-
-        # Write data rows
-        for item in filtered_data:
-            ws.append([item['id'], item['time_of_creating_request'], item.get('other_field', '')])  # Adjust fields as necessary
-
-        # Create a response object
-        response = HttpResponse(content=wb.save(response), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="filtered_data.xlsx"'
-
-        return response
-    
-
-
 def logout(request):
     request.session['is_authenticated'] = False
     return redirect('login_page')
