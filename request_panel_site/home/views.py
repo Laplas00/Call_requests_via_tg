@@ -80,7 +80,7 @@ def main_panel(request):
         if res.status_code == 200:
             messages.success(request, 'Okay')
         else:
-            messages.error(request, str(f'Error with status code: {res.status_code}'))
+            messages.error(request, str(f'Error with status code: {res.status_code}\n And text {res.text}'))
 
         messages.info(request, str(f'Result: {result}'))
         
