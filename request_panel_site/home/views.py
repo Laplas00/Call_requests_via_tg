@@ -123,11 +123,24 @@ def request_loader(request):
             'username':user.username,  # Assuming you have this field
             'profile_picture': user.photo_url,  # Assuming you have this field
         }
-    return render(request, 'load_call.html',
-                    {'title':'DataLoad',
-                    'profile_photo':profile_data['profile_picture'],
-                    'first_name':profile_data['first_name'],
-                    'username':profile_data['username'],})
+        return render(request, 'load_call.html',
+                        {'title':'DataLoad',
+                        'profile_photo':profile_data['profile_picture'],
+                        'first_name':profile_data['first_name'],
+                        'username':profile_data['username'],})
+    elif request.method == "POST":
+        data_from = request.POST.get('from_date')
+        data_to = request.POST.get('to_date')
+        res = r.get(f"{api_url}/call_request")
+        if res.status_code == 200:
+            messages.success(request, 'Okay')
+        else:
+            messages.error(request, str(f'Error with status code: {res.status_code}\n And text {res.text}'))
+
+        for i in res.json():
+            print(i)
+        return redirect('request_loader')
+
     
 
 
